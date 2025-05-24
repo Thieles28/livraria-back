@@ -115,13 +115,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @PostConstruct
     public void initializeUserData() {
-        Usuario usuario = Usuario.builder()
+        Usuario admin = Usuario.builder()
                 .firstName("Thieles")
                 .lastName("Martins")
-                .email("thieles@gmail.com")
-                .password(passwordEncoder.encode("12345678"))
+                .email("thieles@livraria.com")
+                .password(passwordEncoder.encode("senha123"))
                 .role(Role.ADMIN)
                 .build();
-        userRepository.save(usuario);
+
+        Usuario usuario = Usuario.builder()
+                .firstName("João")
+                .lastName("Silva")
+                .email("teste@livraria.com")
+                .password(passwordEncoder.encode("senha123"))
+                .role(Role.USER)
+                .build();
+
+        userRepository.saveAll(List.of(admin, usuario));
     }
 }
